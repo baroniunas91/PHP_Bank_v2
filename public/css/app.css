@@ -1,0 +1,24 @@
+.add {
+  color: black;
+}
+
+.add__container {
+  width: 20px;
+}
+
+.main {
+  color: red;
+}
+
+.main a {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.main__container {
+  color: black;
+}
+
+.main__container__super {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+

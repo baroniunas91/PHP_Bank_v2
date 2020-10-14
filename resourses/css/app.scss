@@ -1,0 +1,17 @@
+@import './pages/add';
+
+.main {
+    color: red;
+    a {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    &__container {
+        color: black;
+        &__super {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        &__kazkas {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    }
+}

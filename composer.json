@@ -1,0 +1,16 @@
+{
+    "name": "edgaras/bankas_v2",
+    "description": "bankas",
+    "autoload": {
+        "psr-4": {
+            "Bankas\\": "App"
+        }
+    },
+    "authors": [
+        {
+            "name": "Edgaras",
+            "email": "baroniunas@gmail.com"
+        }
+    ],
+    "require": {}
+}
