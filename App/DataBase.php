@@ -1,5 +1,5 @@
 <?php
-namespace App\DB;
+namespace Bankas;
 
 interface DataBase {
     function create ( array $userData ) : void ;
