@@ -7,18 +7,10 @@ class AccoutController  {
     private $view;
 
     public function create() {
-        $this->model = new AccountModel;
         $this->view = new AccountView;
-        
-            $this->model->create([]);
-            $this->view->showEmptyForm();
-        
-        echo 'create';
+        $this->view->showCreateView();
     }
     public function save() {
-        if (isset($_POST['create'])) {
-            $this->model->create($_POST['name'], $_POST['surname'], $_POST['personID']);
-        }
         echo 'save';
     }
     public function edit(int $id) {
@@ -31,6 +23,7 @@ class AccoutController  {
         echo 'delete ' . $id;
     }
     public function index() {
-        require DIR.'../App/pages/account.php';
+        $this->view = new AccountView;
+        $this->view->showIndexView();
     }
 }
