@@ -39,7 +39,7 @@ if (('account' == $route[0] || '' == $route[0]) && 1 === count($route)) {
 // Login
 } else if ('login' == $route[0]) {
     $lc = new Lc;
-    $lc->doLogin();
+    $lc->showLogin();
 }
 
 // 404
