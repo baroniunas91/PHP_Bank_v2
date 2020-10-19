@@ -1,3 +1,6 @@
+<?php
+    require DIR . '../views/top.php';
+?>
 <div class="content">
     <h1>Create new account</h1>
     <form class="newAccount" action="<?= $mainUrl . $additionallUrl . 'data/accountsData.php'?>" method="post">
@@ -36,4 +39,7 @@
     <form action="" method="get">
         <button class="create-button" type="submit" name="createAccountBack" value="1">Back to accounts list</button>
     </form>
-</div>  
+</div>
+<?php
+    require DIR . '../views/bottom.php';
+?>

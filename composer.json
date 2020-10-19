@@ -3,7 +3,8 @@
     "description": "bankas",
     "autoload": {
         "psr-4": {
-            "Bankas\\": "App"
+            "Controllers\\": "Controllers",
+            "App\\DB\\": "App"
         }
     },
     "authors": [

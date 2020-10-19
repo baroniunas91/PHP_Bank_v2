@@ -1,15 +1,11 @@
 <?php
-use Bankas\AccoutController as Ac;
-use Bankas\LoginController as Lc;
-use Bankas\NotFound as Nf;
-use Bankas\TopAndBottomController as TBc;
+use Controllers\AccoutController as Ac;
+use Controllers\LoginController as Lc;
+use Controllers\NotFound as Nf;
 
 $route = '/' != $path ? str_replace($path, '', $_SERVER['REQUEST_URI']) : preg_replace('/^\//', '', $_SERVER['REQUEST_URI']);
 $route = explode('/', $route);
 
-// Top HTML
-$topAndBottom = new TBc;
-$topAndBottom->showTop();
 
 // Account
 if (('account' == $route[0] || '' == $route[0]) && 1 === count($route)) {
@@ -47,6 +43,3 @@ else {
     $nf = new Nf;
     $nf->showNotFound();
 }
-
-// Bottom HTML
-return $topAndBottom->showBottom();

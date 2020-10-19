@@ -1,17 +1,19 @@
 <?php
 
-namespace Bankas;
+namespace Controllers;
+
+use App\DB\JsonDb as Db;
 
 class AccoutController  {
+
     private $model;
-    private $view;
 
     public function create() {
-        $this->view = new AccountView;
-        $this->view->showCreateView();
+        require DIR . '../views/create.php';
     }
     public function save() {
-        echo 'save';
+        $this->model = new Db;
+        $this->model->showAll();
     }
     public function edit(int $id) {
         echo 'edit ' . $id;
@@ -23,7 +25,6 @@ class AccoutController  {
         echo 'delete ' . $id;
     }
     public function index() {
-        $this->view = new AccountView;
-        $this->view->showIndexView();
+        require DIR . '../views/accounts.php';
     }
 }

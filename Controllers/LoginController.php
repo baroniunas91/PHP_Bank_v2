@@ -1,13 +1,12 @@
 <?php
 
-namespace Bankas;
+namespace Controllers;
 
 class LoginController  {
     private $view;
 
     public function showLogin() {
-        $this->view = new LoginView;
-        return $this->view->showLoginForm();
+        require DIR . '../views/login.php';
     }
     public function doLogin() {
         // Reikes modelio kur krepsis į DB
