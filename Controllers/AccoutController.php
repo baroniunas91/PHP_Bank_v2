@@ -13,7 +13,9 @@ class AccoutController  {
     }
     public function save() {
         $this->model = new Db;
-        $this->model->showAll();
+        $this->model->create(['name' => $_POST['name'], 'surname' => $_POST['surname'], 'personId' => $_POST['personId']]);
+        header('Location: ' . URL . 'account');
+        die;
     }
     public function edit(int $id) {
         echo 'edit ' . $id;
@@ -25,6 +27,8 @@ class AccoutController  {
         echo 'delete ' . $id;
     }
     public function index() {
+        $this->model = new Db;
+        $accountsDb = $this->model->showAll();
         require DIR . '../views/accounts.php';
     }
 }

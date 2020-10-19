@@ -3,7 +3,7 @@
 ?>
 <div class="content">
     <h1>Create new account</h1>
-    <form class="newAccount" action="<?= $mainUrl . $additionallUrl . 'data/accountsData.php'?>" method="post">
+    <form class="newAccount" action="<?= URL . 'account/save' ?>" method="post">
         <div class="input">
             <label>Name:</label>
             <input type="text" name="name" placeholder="Enter your name">
@@ -36,9 +36,7 @@
         </div>
         <button type="submit" name="create" value="1" class="create-account">Create</button>
     </form>
-    <form action="" method="get">
-        <button class="create-button" type="submit" name="createAccountBack" value="1">Back to accounts list</button>
-    </form>
+    <a href="<?= URL . 'account' ?>" class="create-button">Back to accounts list</a>
 </div>
 <?php
     require DIR . '../views/bottom.php';
