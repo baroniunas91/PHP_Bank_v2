@@ -12,8 +12,8 @@ class JsonDb implements DataBase {
         $data['name'] = $userData['name'];
         $data['surname'] = $userData['surname'];
         $data['personId'] = $userData['personId'];
-        $data['bankAccount'] = $this->generateBankAccount();
-        $data['balance'] = 0;
+        $data['bankAccount'] = $userData['bankAccount'];
+        $data['balance'] = $userData['balance'];
         $this->insertData($data);
     }
 
@@ -27,17 +27,21 @@ class JsonDb implements DataBase {
 
     }
     function showAll () : array {
-        $this->getData();
-        return $this->data;
+        $accounts = $this->getData();
+        usort($accounts, function($a, $b) {
+            return $a['surname'] > $b['surname'];
+        });
+        return $accounts;
     }
 
     function getData() {
-        $this->data = json_decode(file_get_contents(DIR . '../App/data/accountsData.json'), 1);
+        return $this->data = json_decode(file_get_contents(DIR . '../App/data/accountsData.json'), 1);
     }
 
     function insertData(array $data) {
         $this->data[] = $data;
         $this->data = file_put_contents(DIR . '../App/data/accountsData.json', json_encode($this->data));
+        $_SESSION['addSuccess'] = 'You are successfully added new account! Owner: ' . $data['name'] .' '. $data['surname'];
     }
 
     function getNextId() {

@@ -93,6 +93,11 @@ body * {
   text-shadow: 2px 2px 4px grey;
 }
 
+.content .create {
+  display: inline-block;
+  margin: 20px 0;
+}
+
 .content .infoAboutAccount {
   margin: 10px 0;
 }
@@ -131,10 +136,14 @@ body * {
   background-color: black;
   margin: 20px 0px;
   padding: 5px 15px;
-  cursor: pointer;
   color: white;
   border-radius: 5px;
   box-shadow: 5px 10px 18px #888888;
+  text-decoration: none;
+}
+
+.content a {
+  margin: 20px 0;
 }
 
 .account {
@@ -219,6 +228,7 @@ body * {
   height: 20px;
   padding-left: 5px;
   margin-top: 5px;
+  color: black;
 }
 
 .addWrong {

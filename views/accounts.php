@@ -4,7 +4,9 @@
 ?>
 <div class="content">
     <h1>Bank accounts list</h1>
-    <a href="<?= URL . 'account/create' ?>" class="create-button">Create new account</a>
+    <div class="create">
+        <a href="<?= URL . 'account/create' ?>" class="create-button">Create new account</a>
+    </div>
     <!-- pridėda sąskaita sekmingai pranešimas -->
     <?php
     if(isset($_SESSION['addSuccess'])) : ?>

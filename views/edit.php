@@ -1,12 +1,17 @@
 <?php
     require DIR . '../views/top.php';
+    $name = $accountData['name'];
+    $surname = $accountData['surname'];
+    $personId = $accountData['personId'];
+    $bankAccount = $accountData['bankAccount'];
+    $balance = $accountData['balance'];
 ?>
 <div class="content">
-    <h1>Create new account</h1>
-    <form class="newAccount" action="<?= URL . 'account/save' ?>" method="post">
+    <h1>Edit account</h1>
+    <form class="newAccount" action="<?= URL . 'account/edit' ?>" method="post">
         <div class="input">
             <label>Name:</label>
-            <input type="text" name="name" placeholder="Enter your name">
+            <input type="text" name="name" placeholder="Enter your name" value="<?= $name ?>">
             <?php
             if(isset($_SESSION['addWrongName'])) : ?>
             <p class="addWrong"><?= $_SESSION['addWrongName'] ?></h3>
@@ -16,7 +21,7 @@
         </div>
         <div class="input">
             <label>Surname:</label>
-            <input type="text" name="surname" placeholder="Enter your surname">
+            <input type="text" name="surname" placeholder="Enter your surname" value="<?= $surname ?>">
             <?php
             if(isset($_SESSION['addWrongSurname'])) : ?>
             <p class="addWrong"><?= $_SESSION['addWrongSurname'] ?></h3>
@@ -26,7 +31,7 @@
         </div>
         <div class="input">
             <label>Person ID:</label>
-            <input type="text" name="personId" placeholder="Enter your person ID">
+            <input type="text" name="personId" placeholder="Enter your person ID" value="<?= $personId ?>">
             <?php
             if(isset($_SESSION['addWrongPersonId'])) : ?>
             <p class="addWrong"><?= $_SESSION['addWrongPersonId'] ?></h3>
@@ -34,7 +39,15 @@
             unset($_SESSION['addWrongPersonId']);
             endif; ?>
         </div>
-        <button type="submit" name="create" value="1" class="create-account">Create</button>
+        <div class="input">
+            <label>Bank Account:</label>
+            <input type="text" name="bankAccount" value="<?= $bankAccount ?>" disabled>
+        </div>
+        <div class="input">
+            <label>Balance:</label>
+            <input type="text" name="balance" placeholder="Enter money" value="<?= $balance ?>" disabled>
+        </div>
+        <button type="submit" name="edit" value="1" class="create-account">Edit</button>
     </form>
     <div class="create">
         <a href="<?= URL . 'account' ?>" class="create-button">Back to accounts list</a>
