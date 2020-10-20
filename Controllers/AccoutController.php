@@ -26,16 +26,31 @@ class AccoutController  {
     }
     public function edit(int $id) {
         $this->model = new Db;
-        $db = $this->model->getData();
-        $this->validator = new Validator;
-        $accountData = $this->validator->validEdit($id, $db);
+        $accountData = $this->model->show($id);
         require DIR . '../views/edit.php';
     }
     public function update($id) {
-        echo 'update '  . $id;
+        $this->model = new Db;
+        $postData = ['name' => $_POST['name'], 'surname' => $_POST['surname'], 'personId' => $_POST['personId'], 'balance' => $_POST['balance']];
+        $this->validator = new Validator;
+        $this->validator->validUpdate($id, $postData);
+        $this->model->update($id, $postData);
+        header('Location: ' . URL . 'account');
+        die;
     }
     public function delete(int $id) {
-        echo 'delete ' . $id;
+        if(isset($_POST['delete'])) {
+            $this->model = new Db;
+            $this->validator = new Validator;
+            $db = $this->model->getData();
+            $this->validator->validDelete($id, $db);
+            $this->model->delete($id);
+            header('Location: ' . URL . 'account');
+            die;
+        } else {
+            header('Location: ' . URL . '404');
+            die;
+        }
     }
     public function index() {
         $this->model = new Db;

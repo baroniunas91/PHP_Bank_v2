@@ -32,21 +32,11 @@
     endif; ?>
     <!-- pranešimas, kad paimti pinigus iš sąskaitos pavyko -->
     <?php
-    if(isset($_SESSION['takeSuccess'])) : ?>
-    <h3 class="addSuccess">You are successfully take <?= $_SESSION['takeSuccessQty']?>Eur from <?= $_SESSION['takeSuccessAccount']?> bank account!</h3>
+    if(isset($_SESSION['editSuccess'])) : ?>
+    <h3 class="addSuccess">You are successfully edit <?= $_SESSION['editAccount']?> bank account!</h3>
     <?php 
-    unset($_SESSION['takeSuccess']);
-    unset($_SESSION['takeSuccessAccount']);
-    unset($_SESSION['takeSuccessQty']);
-    endif; ?>
-    <!-- pranešimas, kad įdėti pinigus į sąskaitą pavyko -->
-    <?php
-    if(isset($_SESSION['addMoneySuccess'])) : ?>
-    <h3 class="addSuccess">You are successfully add <?= $_SESSION['addMoneySuccessQty']?>Eur into <?= $_SESSION['addMoneySuccessAccount']?> bank account!</h3>
-    <?php 
-    unset($_SESSION['addMoneySuccess']);
-    unset($_SESSION['addMoneySuccessAccount']);
-    unset($_SESSION['addMoneySuccessQty']);
+    unset($_SESSION['editSuccess']);
+    unset($_SESSION['editAccount']);
     endif; ?>
     <?php foreach($accountsDb as $value): ?>
     <div class=account>
@@ -58,15 +48,10 @@
             <p class="balance"><?= $value['balance']?>Eur</p>
         </div>
         <div class="account-actions">
-            <form action="<?= $mainUrl . $additionallUrl .'?p=remove' ?>" method="post">
-                <button type="submit" name="remove" value="<?= $value['id'] ?>" class="delete">Delete</button>
+            <form action="<?= URL . 'account/delete/' . $value['id'] ?>" method="post">
+                <button class="button delete" name="delete" value="<?= $value['id'] ?>" type="submit">Delete</button>
             </form>
-            <form action="<?= $mainUrl . $additionallUrl .'?p=add' ?>" method="post">
-                <button type="submit" name="add" value="<?= $value['id'] ?>" class="add">Add</button>
-            </form>
-            <form action="<?= $mainUrl . $additionallUrl .'?p=take' ?>" method="post">
-                <button type="submit" name="take" value="<?= $value['id'] ?>" class="take">Take</button>
-            </form>
+            <a class="button edit" href="<?= URL . 'account/edit/' . $value['id'] ?>">Edit</a>
         </div>
     </div>
     <?php endforeach; ?>

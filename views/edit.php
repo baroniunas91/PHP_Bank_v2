@@ -1,5 +1,6 @@
 <?php
     require DIR . '../views/top.php';
+    $id = $accountData['id'];
     $name = $accountData['name'];
     $surname = $accountData['surname'];
     $personId = $accountData['personId'];
@@ -8,7 +9,7 @@
 ?>
 <div class="content">
     <h1>Edit account</h1>
-    <form class="newAccount" action="<?= URL . 'account/edit' ?>" method="post">
+    <form class="newAccount" action="<?= URL . 'account/update/' . $id ?>" method="post">
         <div class="input">
             <label>Name:</label>
             <input type="text" name="name" placeholder="Enter your name" value="<?= $name ?>">
@@ -45,7 +46,13 @@
         </div>
         <div class="input">
             <label>Balance:</label>
-            <input type="text" name="balance" placeholder="Enter money" value="<?= $balance ?>" disabled>
+            <input type="text" name="balance" placeholder="Enter money" value="<?= $balance ?>">
+            <?php
+            if(isset($_SESSION['addWrongBalance'])) : ?>
+            <p class="addWrong"><?= $_SESSION['addWrongBalance'] ?></h3>
+            <?php 
+            unset($_SESSION['addWrongBalance']);
+            endif; ?>
         </div>
         <button type="submit" name="edit" value="1" class="create-account">Edit</button>
     </form>

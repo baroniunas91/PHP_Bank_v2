@@ -1,9 +1,10 @@
 <?php
 namespace App\DB;
-
+use App\DB\Validator;
 class JsonDb implements DataBase {
 
     private $data;
+    private $validator;
 
     function create ( array $userData ) : void {
         $this->getData();
@@ -18,13 +19,38 @@ class JsonDb implements DataBase {
     }
 
     function update ( int $userId , array $userData ) : void {
-
+        $db = $this->getData();
+        foreach($db as $key => $user) {
+            if($user['id'] == $userId) {
+                $db[$key]['name'] = $userData['name'];
+                $db[$key]['surname'] = $userData['surname'];
+                $db[$key]['personId'] = $userData['personId'];
+                $db[$key]['balance'] = round($userData['balance'], 2);
+                $bankAccount = $db[$key]['bankAccount'];
+            }
+        }
+        $_SESSION['editSuccess'] = true;
+        $_SESSION['editAccount'] = $bankAccount;
+        file_put_contents(DIR . '../App/data/accountsData.json', json_encode($db));
     }
     function delete ( int $userId ) : void {
-
+        $db = $this->getData();
+        foreach($db as $key => $user) {
+            if($user['id'] == $userId) {
+                $userName = $db[$key]['name'];
+                $userSurname = $db[$key]['surname'];
+                unset($db[$key]);
+            }
+        }
+        $_SESSION['deleteSuccess'] = true;
+        $_SESSION['deleteName'] = $userName;
+        $_SESSION['deleteSurname'] = $userSurname;
+        file_put_contents(DIR . '../App/data/accountsData.json', json_encode($db));
     }
     function show ( int $userId ) : array {
-
+        $db = $this->getData();
+        $this->validator = new Validator;
+        return $this->validator->validEdit($userId, $db);
     }
     function showAll () : array {
         $accounts = $this->getData();
