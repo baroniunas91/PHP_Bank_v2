@@ -8,8 +8,8 @@
     <h2 class="infoAboutAccount">Account balance: <?= $take['balance']?>Eur</h2>
     <form class="moneyForm" action="<?= URL . 'account/update/' . $take['id']?>" method="post">
         <label>Take money:</label>
-        <input type="text" name="toTake" placeholder="Enter money">
-        <button type="submit" name="take2" value="<?= $take['id'] ?>">Take</button>
+        <input type="text" name="take" placeholder="Enter money">
+        <button type="submit">Take</button>
     </form>
     <?php if(isset($_SESSION['takeFalse'])) : ?>
             <p class="addWrong">Account balance can't be negative!</p>

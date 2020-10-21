@@ -211,7 +211,7 @@ body * {
         margin-top: 10px;
     }
 
-@media (max-width: 925px){
+@media (max-width: 1000px){
     .account .account-info {
         flex-direction: column;
     }
@@ -221,7 +221,7 @@ body * {
     }
 }
 
-@media (max-width: 500px){
+@media (max-width: 580px){
     .account .account-actions {
         flex-direction: column;
     }

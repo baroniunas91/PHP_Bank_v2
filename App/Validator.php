@@ -158,7 +158,18 @@ class Validator {
         }
     }
 
-    public function validAddMoney(array $userData, $addMoney) {
-
+    public function validTake($takeMoney, $userData) {
+        $validNumber = $this->validBalance($takeMoney);
+        if(!$validNumber) {
+            $_SESSION['takeNotNumeric'] = true;
+            header('Location: '. URL . 'account/take/' . $userData['id']);
+            die;
+        }
+        if($userData['balance'] - $takeMoney < 0) {
+            $_SESSION['takeFalse'] = true;
+            header('Location: '. URL . 'account/take/' . $userData['id']);
+            die;
+        }
+        return true;
     }
 }

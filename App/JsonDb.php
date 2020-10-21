@@ -37,8 +37,6 @@ class JsonDb implements DataBase {
                 break;
             }
         }
-        $_SESSION['editSuccess'] = true;
-        $_SESSION['editAccount'] = $bankAccount;
         file_put_contents(DIR . '../App/data/accountsData.json', json_encode($db));
     }
 
@@ -58,7 +56,6 @@ class JsonDb implements DataBase {
     }
     function show ( int $userId ) : array {
         $db = $this->getData();
-        // $this->validator = new Validator;
         $flag = true;
         foreach($db as $val) {
             if($val['id'] == $userId) {

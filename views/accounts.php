@@ -38,6 +38,24 @@
     unset($_SESSION['editSuccess']);
     unset($_SESSION['editAccount']);
     endif; ?>
+    <!-- pranešimas, kad paimti pinigus iš sąskaitos pavyko -->
+    <?php
+        if(isset($_SESSION['takeSuccess'])) : ?>
+        <h3 class="addSuccess">You are successfully take <?= $_SESSION['takeSuccessQty']?>Eur from <?= $_SESSION['takeSuccessAccount']?> bank account!</h3>
+        <?php 
+        unset($_SESSION['takeSuccess']);
+        unset($_SESSION['takeSuccessAccount']);
+        unset($_SESSION['takeSuccessQty']);
+        endif; ?>
+        <!-- pranešimas, kad įdėti pinigus į sąskaitą pavyko -->
+        <?php
+        if(isset($_SESSION['addMoneySuccess'])) : ?>
+        <h3 class="addSuccess">You are successfully add <?= $_SESSION['addMoneySuccessQty']?>Eur into <?= $_SESSION['addMoneySuccessAccount']?> bank account!</h3>
+        <?php 
+        unset($_SESSION['addMoneySuccess']);
+        unset($_SESSION['addMoneySuccessAccount']);
+        unset($_SESSION['addMoneySuccessQty']);
+        endif; ?>
     <?php foreach($accountsDb as $value): ?>
     <div class=account>
         <div class="account-info">
