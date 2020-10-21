@@ -1,10 +1,9 @@
 <?php
 namespace App\DB;
-use App\DB\Validator;
+
 class JsonDb implements DataBase {
 
     private $data;
-    private $validator;
 
     function create ( array $userData ) : void {
         $this->getData();
@@ -33,6 +32,7 @@ class JsonDb implements DataBase {
         $_SESSION['editAccount'] = $bankAccount;
         file_put_contents(DIR . '../App/data/accountsData.json', json_encode($db));
     }
+    
     function delete ( int $userId ) : void {
         $db = $this->getData();
         foreach($db as $key => $user) {
@@ -49,9 +49,26 @@ class JsonDb implements DataBase {
     }
     function show ( int $userId ) : array {
         $db = $this->getData();
-        $this->validator = new Validator;
-        return $this->validator->validEdit($userId, $db);
+        // $this->validator = new Validator;
+        $flag = true;
+        foreach($db as $val) {
+            if($val['id'] == $userId) {
+                $name = $val['name'];
+                $surname = $val['surname'];
+                $personId = $val['personId'];
+                $bankAccount = $val['bankAccount'];
+                $balance = $val['balance'];
+                $flag = false;
+                break;
+            }
+        }
+        if($flag) {
+            header('Location: '. URL . '404');
+            die;
+        }
+        return ['id' => $userId, 'name' => $name, 'surname' => $surname, 'personId' => $personId, 'bankAccount' => $bankAccount, 'balance' => $balance];
     }
+
     function showAll () : array {
         $accounts = $this->getData();
         usort($accounts, function($a, $b) {

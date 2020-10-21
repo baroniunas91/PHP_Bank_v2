@@ -52,6 +52,8 @@
                 <button class="button delete" name="delete" value="<?= $value['id'] ?>" type="submit">Delete</button>
             </form>
             <a class="button edit" href="<?= URL . 'account/edit/' . $value['id'] ?>">Edit</a>
+            <a class="button add" href="<?= URL . 'account/add/' . $value['id'] ?>">Add</a>
+            <a class="button take" href="<?= URL . 'account/take/' . $value['id'] ?>">Take</a>
         </div>
     </div>
     <?php endforeach; ?>

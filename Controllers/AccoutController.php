@@ -2,11 +2,12 @@
 
 namespace Controllers;
 
-use App\DB\JsonDb as Db;
 use App\DB\Validator;
+use App\DB\DbFactory;
 
 class AccoutController  {
 
+    private $makeDb = 'JsonDb';
     private $model;
     private $validator;
 
@@ -14,7 +15,7 @@ class AccoutController  {
         require DIR . '../views/create.php';
     }
     public function save() {
-        $this->model = new Db;
+        $this->model = DbFactory::makeDatabase($this->makeDb);
         $this->validator = new Validator;
         $postData = ['name' => $_POST['name'], 'surname' => $_POST['surname'], 'personId' => $_POST['personId']];
         $db = $this->model->getData();
@@ -25,12 +26,12 @@ class AccoutController  {
         die;
     }
     public function edit(int $id) {
-        $this->model = new Db;
+        $this->model = DbFactory::makeDatabase($this->makeDb);
         $accountData = $this->model->show($id);
         require DIR . '../views/edit.php';
     }
     public function update($id) {
-        $this->model = new Db;
+        $this->model = DbFactory::makeDatabase($this->makeDb);
         $postData = ['name' => $_POST['name'], 'surname' => $_POST['surname'], 'personId' => $_POST['personId'], 'balance' => $_POST['balance']];
         $this->validator = new Validator;
         $this->validator->validUpdate($id, $postData);
@@ -40,7 +41,7 @@ class AccoutController  {
     }
     public function delete(int $id) {
         if(isset($_POST['delete'])) {
-            $this->model = new Db;
+            $this->model = DbFactory::makeDatabase($this->makeDb);
             $this->validator = new Validator;
             $db = $this->model->getData();
             $this->validator->validDelete($id, $db);
@@ -53,8 +54,16 @@ class AccoutController  {
         }
     }
     public function index() {
-        $this->model = new Db;
+        $this->model = DbFactory::makeDatabase($this->makeDb);
         $accountsDb = $this->model->showAll();
         require DIR . '../views/accounts.php';
+    }
+
+    public function add($id) {
+        $this->model = DbFactory::makeDatabase($this->makeDb);
+        $add = $this->model->show($id);
+        require DIR . '../views/add.php';
+        // $add['balance'] = $add['balance'] + 55;
+        // $this->model->update($id, $add);
     }
 }

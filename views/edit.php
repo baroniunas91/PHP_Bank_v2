@@ -1,5 +1,6 @@
 <?php
     require DIR . '../views/top.php';
+    require DIR . '../views/menu.php';
     $id = $accountData['id'];
     $name = $accountData['name'];
     $surname = $accountData['surname'];

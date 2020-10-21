@@ -205,6 +205,14 @@ body * {
   background-color: red;
 }
 
+.account .account-actions .add {
+  background-color: darkorange;
+}
+
+.account .account-actions .take {
+  background-color: darkslateblue;
+}
+
 .newAccount .input {
   margin: 10px 0;
   display: flex;

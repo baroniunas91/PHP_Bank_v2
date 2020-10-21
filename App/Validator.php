@@ -79,24 +79,6 @@ class Validator {
         }
     }
 
-    public function validEdit(int $id, array $db) {
-        $flag = true;
-        foreach($db as $val) {
-            if($val['id'] == $id) {
-                $name = $val['name'];
-                $surname = $val['surname'];
-                $personId = $val['personId'];
-                $bankAccount = $val['bankAccount'];
-                $balance = $val['balance'];
-                $flag = false;
-            }
-        }
-        if($flag) {
-            header('Location: '. URL . '404');
-            die;
-        }
-        return ['id' => $id, 'name' => $name, 'surname' => $surname, 'personId' => $personId, 'bankAccount' => $bankAccount, 'balance' => $balance];
-    }
     public function validUpdate($id, array $enteredData) {
         $validName = $this->validName($enteredData['name']);
         $validSurname = $this->validSurname($enteredData['surname']);
