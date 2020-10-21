@@ -8,13 +8,13 @@
     <h2 class="infoAboutAccount">Account balance: <?= $add['balance']?>Eur</h2>
     <form class="moneyForm" action="<?= URL . 'account/update/' . $add['id']?>" method="post">
         <label>Add money:</label>
-        <input type="text" name="qty" placeholder="Enter money">
-        <button type="submit" name="index" value="<?= $add['id'] ?>">Add</button>
+        <input type="text" name="balance" placeholder="Enter money">
+        <button type="submit">Add</button>
     </form>
-    <?php if(isset($_SESSION['addNotNumeric'])) : ?>
-        <p class="addWrong">Please enter a number!</p>
+    <?php if(isset($_SESSION['addWrongBalance'])) : ?>
+        <p class="addWrong"><?= $_SESSION['addWrongBalance'] ?></p>
     <?php 
-    unset($_SESSION['addNotNumeric']);
+    unset($_SESSION['addWrongBalance']);
     endif; ?>
     <div class="create">
         <a href="<?= URL . 'account' ?>" class="create-button">Back to accounts list</a>

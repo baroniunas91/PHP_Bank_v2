@@ -80,10 +80,26 @@ class Validator {
     }
 
     public function validUpdate($id, array $enteredData) {
-        $validName = $this->validName($enteredData['name']);
-        $validSurname = $this->validSurname($enteredData['surname']);
-        $personIdValid = $this->validPersonId($enteredData['personId']);
-        $validBalance = $this->validBalance($enteredData['balance']);
+        if(isset($enteredData['name'])) {
+            $validName = $this->validName($enteredData['name']);
+        } else {
+            $validName = true;
+        }
+        if(isset($enteredData['surname'])) {
+            $validSurname = $this->validSurname($enteredData['surname']);
+        } else {
+            $validSurname = true;
+        }
+        if(isset($enteredData['personId'])) {
+            $personIdValid = $this->validPersonId($enteredData['personId']);
+        } else {
+            $personIdValid = true;
+        }
+        if(isset($enteredData['balance'])) {
+            $validBalance = $this->validBalance($enteredData['balance']);
+        } else {
+            $validBalance = true;
+        }
 
         // jei kazkur buvo nevalidu redirectins vel vesti is naujo
         if(!$validName || !$validSurname || !$personIdValid || !$validBalance) {
@@ -99,8 +115,13 @@ class Validator {
             if(!$validBalance) {
                 $_SESSION['addWrongBalance'] = 'Balance should be number and not less than 0Eur!';
             }
-            header('Location: '. URL . 'account/edit/' . $id);
-            die;
+            if(isset($enteredData['name'])) {
+                header('Location: '. URL . 'account/edit/' . $id);
+                die;
+            } else {
+                header('Location: '. URL . 'account/add/' . $id);
+                die;
+            }
         }
     }
 
@@ -135,5 +156,9 @@ class Validator {
             header('Location: '. URL . 'account');
             die;
         }
+    }
+
+    public function validAddMoney(array $userData, $addMoney) {
+
     }
 }

@@ -32,12 +32,18 @@ class AccoutController  {
     }
     public function update($id) {
         $this->model = DbFactory::makeDatabase($this->makeDb);
-        $postData = ['name' => $_POST['name'], 'surname' => $_POST['surname'], 'personId' => $_POST['personId'], 'balance' => $_POST['balance']];
-        $this->validator = new Validator;
-        $this->validator->validUpdate($id, $postData);
-        $this->model->update($id, $postData);
-        header('Location: ' . URL . 'account');
-        die;
+        $postData = $_POST;
+        if(!isset($postData['name'])) {
+            $newBalance = $this->addMoney($id, $postData['balance']);
+            header('Location: ' . URL . 'account');
+            die;
+        } else {
+            $this->validator = new Validator;
+            $this->validator->validUpdate($id, $postData);
+            $this->model->update($id, $postData);
+            header('Location: ' . URL . 'account');
+            die;
+        }
     }
     public function delete(int $id) {
         if(isset($_POST['delete'])) {
@@ -65,5 +71,20 @@ class AccoutController  {
         require DIR . '../views/add.php';
         // $add['balance'] = $add['balance'] + 55;
         // $this->model->update($id, $add);
+    }
+
+    public function take($id) {
+        $this->model = DbFactory::makeDatabase($this->makeDb);
+        $take = $this->model->show($id);
+        require DIR . '../views/take.php';
+    }
+
+    public function addMoney($id, $addMoney) {
+        $this->model = DbFactory::makeDatabase($this->makeDb);
+        $add = $this->model->show($id);
+        $this->validator = new Validator;
+        $this->validator->validUpdate($id, ['balance' => $addMoney]);
+        $add['balance'] = $add['balance'] + $addMoney;
+        $this->model->update($id, $add);
     }
 }

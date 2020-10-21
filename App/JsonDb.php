@@ -21,18 +21,27 @@ class JsonDb implements DataBase {
         $db = $this->getData();
         foreach($db as $key => $user) {
             if($user['id'] == $userId) {
-                $db[$key]['name'] = $userData['name'];
-                $db[$key]['surname'] = $userData['surname'];
-                $db[$key]['personId'] = $userData['personId'];
-                $db[$key]['balance'] = round($userData['balance'], 2);
+                if(isset($userData['name'])) {
+                    $db[$key]['name'] = $userData['name'];
+                }
+                if(isset($userData['surname'])) {
+                    $db[$key]['surname'] = $userData['surname'];
+                }
+                if(isset($userData['personId'])) {
+                    $db[$key]['personId'] = $userData['personId'];
+                }
+                if(isset($userData['balance'])) {
+                    $db[$key]['balance'] = round($userData['balance'], 2);
+                }
                 $bankAccount = $db[$key]['bankAccount'];
+                break;
             }
         }
         $_SESSION['editSuccess'] = true;
         $_SESSION['editAccount'] = $bankAccount;
         file_put_contents(DIR . '../App/data/accountsData.json', json_encode($db));
     }
-    
+
     function delete ( int $userId ) : void {
         $db = $this->getData();
         foreach($db as $key => $user) {

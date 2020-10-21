@@ -55,7 +55,7 @@
             unset($_SESSION['addWrongBalance']);
             endif; ?>
         </div>
-        <button type="submit" name="edit" value="1" class="create-account">Edit</button>
+        <button type="submit" class="create-account">Edit</button>
     </form>
     <div class="create">
         <a href="<?= URL . 'account' ?>" class="create-button">Back to accounts list</a>

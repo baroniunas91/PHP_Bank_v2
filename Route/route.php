@@ -36,6 +36,10 @@ if (('account' == $route[0] || '' == $route[0]) && 1 === count($route)) {
     $ac = new Ac();
     $ac->add($route[2]);
 
+} else if('account' == $route[0] && 'take' == $route[1] && 3 === count($route)) {
+    $ac = new Ac();
+    $ac->take($route[2]);
+
 // Login
 } else if ('login' == $route[0]) {
     $lc = new Lc;
